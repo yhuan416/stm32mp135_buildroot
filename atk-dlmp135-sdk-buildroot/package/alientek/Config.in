@@ -1,0 +1,8 @@
+menuconfig BR2_PACKAGE_ATK_DLMP135
+    bool "alientek stm32mp135 software developer's kit"
+    select BR2_PACKAGE_MMCMOUNT
+    default n
+
+source "package/alientek/atk_dlmp135/Config.in"
+source "package/alientek/mmcmount/Config.in"
+source "package/alientek/atk_dlmp135/QDesktop/Config.in"

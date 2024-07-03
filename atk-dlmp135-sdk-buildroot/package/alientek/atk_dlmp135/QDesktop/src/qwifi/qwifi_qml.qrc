@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Wifi_Window.qml</file>
+        <file>WifiListView.qml</file>
+        <file>CustomSwitch.qml</file>
+        <file>ActionSheet.qml</file>
+        <file>PasswordPanel.qml</file>
+        <file>WifiInofoPage.qml</file>
+        <file>CenterChoseStyleDialog.qml</file>
+        <file>Wifi.qml</file>
+    </qresource>
+</RCC>

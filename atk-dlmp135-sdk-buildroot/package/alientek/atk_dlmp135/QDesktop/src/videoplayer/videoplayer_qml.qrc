@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>VideoPlayer.qml</file>
+        <file>VideoPlayer_Window.qml</file>
+        <file>MediaListView.qml</file>
+        <file>PlaySilder.qml</file>
+    </qresource>
+</RCC>

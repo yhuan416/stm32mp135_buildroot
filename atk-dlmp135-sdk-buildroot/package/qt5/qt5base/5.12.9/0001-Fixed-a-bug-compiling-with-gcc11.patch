@@ -1,0 +1,41 @@
+From b0ef942fe002acb2dabe1573abb7a08676a233ed Mon Sep 17 00:00:00 2001
+From: alientek <dengzhimao@alientek.com>
+Date: Fri, 16 Dec 2022 16:42:48 +0800
+Subject: [PATCH] Fixed a bug compiling with gcc11
+
+---
+ src/corelib/global/qfloat16.h  | 3 +++
+ src/corelib/tools/qbytearray.h | 3 +++
+ 2 files changed, 6 insertions(+)
+
+diff --git a/src/corelib/global/qfloat16.h b/src/corelib/global/qfloat16.h
+index b76d2b96..42055550 100644
+--- a/src/corelib/global/qfloat16.h
++++ b/src/corelib/global/qfloat16.h
+@@ -44,6 +44,9 @@
+ #include <QtCore/qmetatype.h>
+ #include <string.h>
+ 
++#include <stdexcept>
++#include <limits>
++
+ #if defined(QT_COMPILER_SUPPORTS_F16C) && defined(__AVX2__) && !defined(__F16C__)
+ // All processors that support AVX2 do support F16C too. That doesn't mean
+ // we're allowed to use the intrinsics directly, so we'll do it only for
+diff --git a/src/corelib/tools/qbytearray.h b/src/corelib/tools/qbytearray.h
+index 8ee3a29e..737d35ca 100644
+--- a/src/corelib/tools/qbytearray.h
++++ b/src/corelib/tools/qbytearray.h
+@@ -52,6 +52,9 @@
+ #include <string>
+ #include <iterator>
+ 
++#include <stdexcept>
++#include <limits>
++
+ #ifdef truncate
+ #error qbytearray.h must be included before any header file that defines truncate
+ #endif
+-- 
+2.17.1
+

@@ -1,0 +1,44 @@
+From e22c7e0ca47179e41cbb991cd15c6345f6b6d2e1 Mon Sep 17 00:00:00 2001
+From: alientek <dengzhimao@alientek.com>
+Date: Fri, 16 Dec 2022 17:34:45 +0800
+Subject: [PATCH] qquickwidget: Provide widget window id for video window
+
+---
+ src/quickwidgets/qquickwidget.cpp | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
+
+diff --git a/src/quickwidgets/qquickwidget.cpp b/src/quickwidgets/qquickwidget.cpp
+index 55c095af..139fe427 100644
+--- a/src/quickwidgets/qquickwidget.cpp
++++ b/src/quickwidgets/qquickwidget.cpp
+@@ -101,12 +101,26 @@ private:
+     QQuickWidget *m_quickWidget;
+ };
+ 
++class QQuickOffscreenWindow : public QQuickWindow, public QVideoWindowAbstractInterface
++{
++public:
++    explicit QQuickOffscreenWindow(QQuickRenderControl *control)
++        : QQuickWindow(control),
++        renderControl(control) {}
++    WId videoWinId() const Q_DECL_OVERRIDE {
++        QWindow *window = renderControl->renderWindow(NULL);
++        return window ? window->winId() : 0;
++    }
++private:
++    QQuickRenderControl *renderControl;
++};
++
+ void QQuickWidgetPrivate::init(QQmlEngine* e)
+ {
+     Q_Q(QQuickWidget);
+ 
+     renderControl = new QQuickWidgetRenderControl(q);
+-    offscreenWindow = new QQuickWindow(*new QQuickOffcreenWindowPrivate(),renderControl);
++    offscreenWindow = new QQuickOffscreenWindow(renderControl);
+     offscreenWindow->setTitle(QString::fromLatin1("Offscreen"));
+     // Do not call create() on offscreenWindow.
+ 
+-- 
+2.17.1
+

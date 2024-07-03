@@ -1,0 +1,9 @@
+if BR2_PACKAGE_ATK_DLMP135
+config BR2_PACKAGE_ATK_DLMP135_SETTINGS
+        bool "ATK DLMP135 Settings"
+        depends on BR2_PACKAGE_ALSA_UTILS
+        default n
+        help
+            ATK-MP135 Settings
+
+endif #BR2_PACKAGE_ATK_DLMP135_SETTINGS

@@ -1,0 +1,22 @@
+From 76a490fb9ae27c7c4e6fc8bb43eb602174f7d7cd Mon Sep 17 00:00:00 2001
+From: alientek <dengzhimao@alientek.com>
+Date: Fri, 16 Dec 2022 18:18:50 +0800
+Subject: [PATCH] Fixed bug compiling int32t with gcc11
+
+---
+ src/3rdparty/mapbox-gl-native/src/mbgl/util/convert.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/3rdparty/mapbox-gl-native/src/mbgl/util/convert.cpp b/src/3rdparty/mapbox-gl-native/src/mbgl/util/convert.cpp
+index 97bfe91..30125a8 100644
+--- a/src/3rdparty/mapbox-gl-native/src/mbgl/util/convert.cpp
++++ b/src/3rdparty/mapbox-gl-native/src/mbgl/util/convert.cpp
+@@ -1,4 +1,5 @@
+ #include <mbgl/util/convert.hpp>
++#include <cstdint>
+ 
+ namespace mbgl {
+ namespace util {
+-- 
+2.17.1
+

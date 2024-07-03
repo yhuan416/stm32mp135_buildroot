@@ -1,0 +1,51 @@
+diff -Nura a/libbb/printable_string.c b/libbb/printable_string.c
+--- a/libbb/printable_string.c	2021-01-12 06:27:20.785120436 -0500
++++ b/libbb/printable_string.c	2021-01-12 06:40:37.481954486 -0500
+@@ -28,8 +28,10 @@
+ 		}
+ 		if (c < ' ')
+ 			break;
+-		if (c >= 0x7f)
++		/*support chinese display*/
++		/*if (c >= 0x7f)
+ 			break;
++		*/
+ 		s++;
+ 	}
+ 
+@@ -42,7 +44,9 @@
+ 			unsigned char c = *d;
+ 			if (c == '\0')
+ 				break;
+-			if (c < ' ' || c >= 0x7f)
++			/*support chinese display*/
++			/*if (c < ' ' || c >= 0x7f)*/
++			if (c < ' ' )
+ 				*d = '?';
+ 			d++;
+ 		}
+diff -Nura a/libbb/unicode.c b/libbb/unicode.c
+--- a/libbb/unicode.c	2021-01-12 06:28:37.601117822 -0500
++++ b/libbb/unicode.c	2021-01-12 06:44:05.502420078 -0500
+@@ -1019,7 +1019,9 @@
+ 					while ((int)--width >= 0);
+ 					break;
+ 				}
+-				*d++ = (c >= ' ' && c < 0x7f) ? c : '?';
++				/*support chinese display*/
++				/**d++ = (c >= ' ' && c < 0x7f) ? c : '?';*/
++				*d++ = (c >= ' ') ? c : '?';
+ 				src++;
+ 			}
+ 			*d = '\0';
+@@ -1027,7 +1029,9 @@
+ 			d = dst = xstrndup(src, width);
+ 			while (*d) {
+ 				unsigned char c = *d;
+-				if (c < ' ' || c >= 0x7f)
++				/* support chinese display*/
++				/*if (c < ' ' || c >= 0x7f)*/
++				if (c < ' ')
+ 					*d = '?';
+ 				d++;
+ 			}

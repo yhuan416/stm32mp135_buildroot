@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Ov_Camera.qml</file>
+        <file>Ov_Camera_Window.qml</file>
+        <file>MoreCamera.qml</file>
+    </qresource>
+</RCC>

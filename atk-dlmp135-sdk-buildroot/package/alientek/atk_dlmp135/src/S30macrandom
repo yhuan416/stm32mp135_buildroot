@@ -1,0 +1,46 @@
+#!/bin/sh
+#
+# Start the mac random....
+#
+
+mkdir -p /var/.macconfig
+MACFILE=/var/.macconfig/mac
+ETHNAME1=eth0
+ETHNAME2=eth1
+
+makeMacByPerl() {
+    echo -e 88`perl -e 'print join("",map{sprintf "%0.2x",rand(256)}(1..6)), "\n"' | cut -c1-10`
+}
+
+if [ ! -f "$MACFILE" ]; then
+    echo `makeMacByPerl` > $MACFILE
+    echo `makeMacByPerl` >> $MACFILE
+    sync
+fi
+tmpvalue1=$(sed -n '1p' $MACFILE)
+tmpvalue2=$(sed -n '2p' $MACFILE)
+
+case "$1" in
+  start)
+        printf "Starting randommac: "
+        /sbin/ifconfig $ETHNAME1 hw ether $tmpvalue1 >/dev/null 2>&1
+        [ $? = 0 ] && echo "$ETHNAME1 OK" || echo "$ETHNAME1 FAIL"
+        /sbin/ifconfig $ETHNAME2 hw ether $tmpvalue2 >/dev/null 2>&1
+        [ $? = 0 ] && echo "$ETHNAME2 OK" || echo "$ETHNAME2 FAIL"
+        ;;
+  stop)
+        printf "Stopping randomac: "
+        /sbin/ifdown -a
+        [ $? = 0 ] && echo "OK" || echo "FAIL"
+        ;;
+  restart|reload)
+        "$0" stop
+        "$0" start
+        ;;
+  *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit $?
+

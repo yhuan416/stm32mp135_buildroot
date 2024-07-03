@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Adc.qml</file>
+        <file>Adc_Window.qml</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,13 @@
+if BR2_PACKAGE_ATK_DLMP135
+config BR2_PACKAGE_QDESKTOP
+        bool "QDesktop"
+        depends on BR2_PACKAGE_QT5
+        depends on BR2_PACKAGE_QT5BASE
+        depends on BR2_PACKAGE_QT5DECLARATIVE
+        depends on BR2_PACKAGE_QT5MULTIMEDIA
+        depends on BR2_PACKAGE_QT5VIRTUALKEYBOARD
+        depends on BR2_PACKAGE_ATK_DLMP135_SETTINGS
+        help
+          ALIENTEK QDesktop application based on QT
+
+endif

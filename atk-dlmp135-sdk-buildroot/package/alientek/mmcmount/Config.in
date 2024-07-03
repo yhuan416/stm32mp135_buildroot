@@ -1,0 +1,8 @@
+if BR2_PACKAGE_ATK_DLMP135
+config BR2_PACKAGE_MMCMOUNT
+        bool "mmc mount"
+        depends on  BR2_PACKAGE_EUDEV
+        help
+            mmc mount
+
+endif #BR2_PACKAGE_MMCMOUNT

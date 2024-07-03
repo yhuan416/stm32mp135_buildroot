@@ -1,0 +1,3 @@
+module AQuickPlugin
+plugin AQuickPlugin
+typeinfo plugin.qmltypes
